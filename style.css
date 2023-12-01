@@ -1,0 +1,39 @@
+@charset "utf-8";
+html{
+    height: 100%;
+}
+body{
+    font-family: "Avenir Next";
+    background-color: rgb(129, 238, 238);
+    min-height: 100%;
+}
+
+.header{
+    height: 100px;
+}
+
+.main{
+    /*background-image:url("https://thumb.photo-ac.com/20/208d4672505fe836fc02bb76a3552a05_t.jpeg");*/
+    height: 1500px;
+    padding: 20px;
+    text-align: center;
+    #set_stamp {
+        margin:auto;
+        height: 950px;
+        width:100%;
+        table-layout: fixed;  
+    }
+}
+
+
+.footer{
+    background-color: aquamarine;
+    height: 100px;
+    width: 100%;
+    
+}
+
+h1 {
+    font-size:50px;
+    text-align:center;
+}
