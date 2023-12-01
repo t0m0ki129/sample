@@ -1,0 +1,41 @@
+.stamp1{
+	position: relative;
+	margin : -50px auto;
+	padding: 10px;
+	width: 100px;
+	height: 100px;
+	border: 5px double #430;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	color: #430;
+	text-align: center;
+	font-size: 18px;
+	font-family: 'Bree Serif', serif;
+	line-height: 100px;
+	-webkit-transform: rotate(-16deg);
+	-ms-transform: rotate(-16deg);
+	transform: rotate(-16deg);
+}
+.stamp1::before{
+	position: absolute;
+	top: 14%;
+	display: block;
+	padding: 0 0 8px;
+	width: 82%;
+	border-bottom:1px solid #430;
+	content: 'GET';
+	font-size: 16px;
+	line-height: 1;
+}
+.stamp1::after{
+	position: absolute;
+	bottom: 16%;
+	display: block;
+	padding: 6px 0 0;
+	width: 82%;
+	border-top: 1px solid #430;
+	content: '2023.10.20';
+	font-size: 13px;
+	line-height: 1;
+}
