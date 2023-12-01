@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
+<head>
+	<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>集めまっし金沢ラリー</title>
-        <link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\style.css">
-		<link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\button.css">
-		<link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\stamp.css">
-		<script src="./jsQR.js"></script>
-	</head>
+        <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./button.css">
+	<link rel="stylesheet" href="./stamp.css">
+	<script src="./jsQR.js"></script>
+</head>
 
-    <body>
+<body>
 
-        <div class="header">
+	<div class="header">
             <h1>集めまっし金沢ラリー!</h1>
         </div>
 		
-		<div class="main">
-            <h4>スタンプを集めて景品をもらおう!!</h4>
-			<div id="common" class="button" onclick="vew(1)">カメラ起動</div>
-            <canvas id="canvas"></canvas>
-			<div id="output">
-				<div id="outputMessage"></div>
-			</div>
+	<div class="main">
+        	<h4>スタンプを集めて景品をもらおう!!</h4>
+		<div id="common" class="button" onclick="vew(1)">カメラ起動</div>
+            	<canvas id="canvas"></canvas>
+		<div id="output">
+			<div id="outputMessage"></div>
+		</div>
 
-			<table id="set_stamp" cellspacing="15" "" border="1">
-                <tr><td><article id="result0">1</article></td><td><article id="result1">2</article></td></tr> 
-                <tr><td><article id="result2">3</article></td><td><article id="result3">4</article></td></tr>  
-                <tr><td><article id="result4">5</article></td><td><article id="result5">6</article></td></tr>
-                <tr><td><article id="result6">7</article></td><td><article id="result7">8</article></td></tr>
-                <tr><td><article id="result8">9</article></td><td><article id="result9">10</article></td></tr>
-            </table>
-			<script>
-			function vew(num) {
-				document.getElementById("common").style.display = "none";
-				if (num == 1) {
-					var video = document.createElement("video");
-					var canvasElement = document.getElementById("canvas");
-					var canvas = canvasElement.getContext("2d");
+		<table id="set_stamp" cellspacing="15" "" border="1">
+                	<tr><td><article id="result0">1</article></td><td><article id="result1">2</article></td></tr> 
+                	<tr><td><article id="result2">3</article></td><td><article id="result3">4</article></td></tr>  
+                	<tr><td><article id="result4">5</article></td><td><article id="result5">6</article></td></tr>
+                	<tr><td><article id="result6">7</article></td><td><article id="result7">8</article></td></tr>
+                	<tr><td><article id="result8">9</article></td><td><article id="result9">10</article></td></tr>
+        	</table>
+		<script>
+		function vew(num) {
+			document.getElementById("common").style.display = "none";
+			if (num == 1) {
+				var video = document.createElement("video");
+				var canvasElement = document.getElementById("canvas");
+				var canvas = canvasElement.getContext("2d");
 
-					function drawLine(begin, end, color) {
-					canvas.beginPath();
-					canvas.moveTo(begin.x, begin.y);
-					canvas.lineTo(end.x, end.y);
-					canvas.lineWidth = 4;
-					canvas.strokeStyle = color;
-					canvas.stroke();
-					}
+				function drawLine(begin, end, color) {
+				canvas.beginPath();
+				canvas.moveTo(begin.x, begin.y);
+				canvas.lineTo(end.x, end.y);
+				canvas.lineWidth = 4;
+				canvas.strokeStyle = color;
+				canvas.stroke();
+				}
 						
-					navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
-						video.srcObject = stream;
-						video.setAttribute("playsinline", true);
-						video.play();
-						requestAnimationFrame(tick);
-					});
+				navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+					video.srcObject = stream;
+					video.setAttribute("playsinline", true);
+					video.play();
+					requestAnimationFrame(tick);
+				});
 				
-					function tick() {
-						if (video.readyState === video.HAVE_ENOUGH_DATA) {
-							canvasElement.height = video.videoHeight;
-							canvasElement.width = video.videoWidth;
-							canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-							var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
-							var code = jsQR(imageData.data, imageData.width, imageData.height, {
-								inversionAttempts: "dontInvert",
-							});
-							if (code) {
-								drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-								drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-								drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-								drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-								stamp(code.data);
-							}
-						}
-						requestAnimationFrame(tick);
+				function tick() {
+					if (video.readyState === video.HAVE_ENOUGH_DATA) {
+						canvasElement.height = video.videoHeight;
+						canvasElement.width = video.videoWidth;
+						canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+						var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+						var code = jsQR(imageData.data, imageData.width, imageData.height, {
+							inversionAttempts: "dontInvert",
+					});
+					if (code) {
+						drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+						drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+						drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+						drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+						stamp(code.data);
 					}
 				}
+				requestAnimationFrame(tick);
 			}
+		}
+	}
 			
 					function stamp(message) {
 						if (message == 1) {
