@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>集めまっし金沢ラリー</title>
+        <link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\style.css">
+		<link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\button.css">
+		<link rel="stylesheet" href="C:\Users\tomoki1209\Desktop\金\スタンプラリー\new\stamp.css">
+		<script src="./jsQR.js"></script>
+	</head>
+
+    <body>
+
+        <div class="header">
+            <h1>集めまっし金沢ラリー!</h1>
+        </div>
+		
+		<div class="main">
+            <h4>スタンプを集めて景品をもらおう!!</h4>
+			<div id="common" class="button" onclick="vew(1)">カメラ起動</div>
+            <canvas id="canvas"></canvas>
+			<div id="output">
+				<div id="outputMessage"></div>
+			</div>
+
+			<table id="set_stamp" cellspacing="15" "" border="1">
+                <tr><td><article id="result0">1</article></td><td><article id="result1">2</article></td></tr> 
+                <tr><td><article id="result2">3</article></td><td><article id="result3">4</article></td></tr>  
+                <tr><td><article id="result4">5</article></td><td><article id="result5">6</article></td></tr>
+                <tr><td><article id="result6">7</article></td><td><article id="result7">8</article></td></tr>
+                <tr><td><article id="result8">9</article></td><td><article id="result9">10</article></td></tr>
+            </table>
+			<script>
+			function vew(num) {
+				document.getElementById("common").style.display = "none";
+				if (num == 1) {
+					var video = document.createElement("video");
+					var canvasElement = document.getElementById("canvas");
+					var canvas = canvasElement.getContext("2d");
+
+					function drawLine(begin, end, color) {
+					canvas.beginPath();
+					canvas.moveTo(begin.x, begin.y);
+					canvas.lineTo(end.x, end.y);
+					canvas.lineWidth = 4;
+					canvas.strokeStyle = color;
+					canvas.stroke();
+					}
+						
+					navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+						video.srcObject = stream;
+						video.setAttribute("playsinline", true);
+						video.play();
+						requestAnimationFrame(tick);
+					});
+				
+					function tick() {
+						if (video.readyState === video.HAVE_ENOUGH_DATA) {
+							canvasElement.height = video.videoHeight;
+							canvasElement.width = video.videoWidth;
+							canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+							var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+							var code = jsQR(imageData.data, imageData.width, imageData.height, {
+								inversionAttempts: "dontInvert",
+							});
+							if (code) {
+								drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+								drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+								drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+								drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+								stamp(code.data);
+							}
+						}
+						requestAnimationFrame(tick);
+					}
+				}
+			}
+			
+					function stamp(message) {
+						if (message == 1) {
+							let result0 = document.getElementById("result0");
+							// 新しくリストを作成
+							let div_element0 = document.createElement('div');
+								div_element0.classList.add("stamp1");
+								div_element0.textContent = "a";
+							// div要素を新たなdiv要素に置き換える
+							result0.replaceWith(div_element0);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 2) {
+							let result1 = document.getElementById("result1");
+							// 新しくリストを作成
+							let div_element1 = document.createElement('div');
+								div_element1.classList.add("stamp1");
+								div_element1.textContent = "b";
+							// div要素を新たなdiv要素に置き換える
+							result1.replaceWith(div_element1);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 3) {
+							let result2 = document.getElementById("result2");
+							// 新しくリストを作成
+							let div_element2 = document.createElement('div');
+								div_element2.classList.add("stamp1");
+								div_element2.textContent = "c";
+							// div要素を新たなdiv要素に置き換える
+							result2.replaceWith(div_element2);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 4) {
+							let result3 = document.getElementById("result3");
+							// 新しくリストを作成
+							let div_element3 = document.createElement('div');
+								div_element3.classList.add("stamp1");
+								div_element3.textContent = "d";
+							// div要素を新たなdiv要素に置き換える
+							result3.replaceWith(div_element3);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 5) {
+							let result4 = document.getElementById("result4");
+							// 新しくリストを作成
+							let div_element4 = document.createElement('div');
+								div_element4.classList.add("stamp1");
+								div_element4.textContent = "e";
+							// div要素を新たなdiv要素に置き換える
+							result4.replaceWith(div_element4);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 6) {
+							let result5 = document.getElementById("result5");
+							// 新しくリストを作成
+							let div_element5 = document.createElement('div');
+								div_element5.classList.add("stamp1");
+								div_element5.textContent = "f";
+							// div要素を新たなdiv要素に置き換える
+							result5.replaceWith(div_element5);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 7) {
+							let result6 = document.getElementById("result6");
+							// 新しくリストを作成
+							let div_element6 = document.createElement('div');
+								div_element6.classList.add("stamp1");
+								div_element6.textContent = "g";
+							// div要素を新たなdiv要素に置き換える
+							result6.replaceWith(div_element6);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 8) {
+							let result7 = document.getElementById("result7");
+							// 新しくリストを作成
+							let div_element7 = document.createElement('div');
+								div_element7.classList.add("stamp1");
+								div_element7.textContent = "h";
+							// div要素を新たなdiv要素に置き換える
+							result7.replaceWith(div_element7);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 9) {
+							let result8 = document.getElementById("result8");
+							// 新しくリストを作成
+							let div_element8 = document.createElement('div');
+								div_element8.classList.add("stamp1");
+								div_element8.textContent = "i";
+							// div要素を新たなdiv要素に置き換える
+							result8.replaceWith(div_element8);
+							document.getElementById("common").style.display = "inline";
+						}
+						if (message == 10) {
+							let result9 = document.getElementById("result9");
+							// 新しくリストを作成
+							let div_element9 = document.createElement('div');
+								div_element9.classList.add("stamp1");
+								div_element9.textContent = "j";
+							// div要素を新たなdiv要素に置き換える
+							result9.replaceWith(div_element9);
+							document.getElementById("common").style.display = "inline";
+						}
+						else {
+							document.getElementById("common").style.display = "inline";
+						}	
+					}
+			</script>	
+        </div>
+
+        <div class="footer">
+            <ul>
+                <li><a href='https://www4.city.kanazawa.lg.jp/'>金沢市ホームページ</a></li>
+                <li><a href="https://www.kanazawa-kankoukyoukai.or.jp/">金沢旅物語</a></li>
+            </ul>
+        </div>    
+
+    </body> 
+</html>
